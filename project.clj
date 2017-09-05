@@ -2,6 +2,8 @@
   :url "http://github.com/reagent-project/reagent"
   :license {:name "MIT"}
   :description "A simple ClojureScript interface to React"
+  :deploy-repositories [["clojars"  {:sign-releases false :url "https://clojars.org/repo"}]
+                        ]
 
   :dependencies [;; If :npm-deps enabled, these are used only for externs.
                  ;; Without direct react dependency, other packages,

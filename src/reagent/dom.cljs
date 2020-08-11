@@ -1,5 +1,5 @@
 (ns reagent.dom
-  (:require [react-dom :as react-dom]
+  (:require [cljsjs.react.dom]
             [reagent.impl.util :as util]
             [reagent.impl.template :as tmpl]
             [reagent.impl.input :as input]
@@ -7,15 +7,16 @@
             [reagent.impl.protocols :as p]
             [reagent.ratom :as ratom]))
 
+(defonce react-dom js/ReactDOM)
 (defonce ^:private roots (atom {}))
 
 (defn- unmount-comp [container]
   (swap! roots dissoc container)
-  (react-dom/unmountComponentAtNode container))
+  (react-dom.unmountComponentAtNode container))
 
 (defn- render-comp [comp container callback]
   (binding [util/*always-update* true]
-    (react-dom/render (comp) container
+    (react-dom.render (comp) container
       (fn []
         (binding [util/*always-update* false]
           (swap! roots assoc container comp)
@@ -55,7 +56,7 @@
 (defn dom-node
   "Returns the root DOM node of a mounted component."
   [this]
-  (react-dom/findDOMNode this))
+  (react-dom.findDOMNode this))
 
 (defn force-update-all
   "Force re-rendering of all mounted Reagent components. This is
